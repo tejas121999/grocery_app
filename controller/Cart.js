@@ -1,4 +1,5 @@
 const { Cart } = require('../model')
+const model = require('../model')
 
 exports.getCart = async (req, res) => {
     try {
@@ -8,6 +9,18 @@ exports.getCart = async (req, res) => {
             },
             limit: req.body.limit,
             offset: req.body.offset,
+            include: [
+                {
+                    model: model.Customer,
+                    as: 'customer_data',
+                    subQuery: false
+                },
+                {
+                    model: model.Product,
+                    as: 'product_data',
+                    subQuery: false
+                }
+            ]
         })
 
         if (!getCart) {

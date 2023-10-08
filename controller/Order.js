@@ -1,4 +1,5 @@
 const { Order } = require('../model')
+const model = require('../model')
 
 exports.getOrder = async (req, res) => {
     try {
@@ -8,8 +9,19 @@ exports.getOrder = async (req, res) => {
             },
             limit: req.body.limit,
             offset: req.body.offset,
+            include: [
+                {
+                    model: model.Customer,
+                    as: 'customer_data',
+                    subQuery: false
+                },
+                {
+                    model: model.Product,
+                    as: 'product_data',
+                    subQuery: false
+                }
+            ]
         })
-
         if (!getOrder) {
             return res.status(200).json({
                 message: "Data not found",
@@ -31,7 +43,7 @@ exports.getOrder = async (req, res) => {
 exports.addOrder = async (req, res) => {
     try {
         const { order } = req.body
-        await Order.create(order).then((result) => {
+        await Order.bulkCreate(order).then((result) => {
             return res.status(200).json({
                 message: "order place successfully",
                 data: result

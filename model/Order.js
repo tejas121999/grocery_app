@@ -24,13 +24,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             field: 'product_id'
         },
+        total_cost: {
+            type: DataTypes.INTEGER,
+            field: 'total_cost'
+        },
         payment_method: {
             type: DataTypes.STRING,
             field: 'payment_method'
         },
-        isPayment: {
+        isDelivered: {
             type: DataTypes.BOOLEAN,
-            field: 'isPayment',
+            field: 'isDelivered',
             defaultValue: false,
         },
         isDelete: {

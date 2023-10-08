@@ -28,11 +28,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             field: 'quantity'
         },
-        isOrder: {
-            type: DataTypes.BOOLEAN,
-            field: 'isOrder',
-            defaultValue: false,
-        },
         isDelete: {
             type: DataTypes.BOOLEAN,
             field: 'isDelete',
